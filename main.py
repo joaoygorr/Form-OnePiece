@@ -18,4 +18,5 @@ for arquivo in caminho_base.iterdir():
     df["ano"] = ano
     df["mes"] = mes
     base_airbnb = base_airbnb.append(df)
-print(base_airbnb)
+
+base_airbnb.head(1000).to_csv("Primeiros_registros.csv", sep=";")
