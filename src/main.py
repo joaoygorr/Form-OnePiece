@@ -39,39 +39,39 @@ app_name.place(x=86, y=15)
 # Configurando frame baixo
 # Saga
 l_saga = Label(frame_down, text="Saga:", anchor=NW, font=("Ivy 10 bold"), bg=co1, fg=co4, relief="flat")
-l_saga.place(x=10, y=4)
+l_saga.place(x=10, y=15)
 e_saga = Entry(frame_down, width=45, justify="left", relief="solid")
-e_saga.place(x=13, y=28)
+e_saga.place(x=13, y=40)
 
 # Arcos
 l_arco = Label(frame_down, text="Arcos:", anchor=NW, font=("Ivy 10 bold"), bg=co1, fg=co4, relief="flat")
-l_arco.place(x=10, y=50)
+l_arco.place(x=10, y=75)
 e_arco = Entry(frame_down, width=45, justify="left", relief="solid")
-e_arco.place(x=13, y=78)
+e_arco.place(x=13, y=100)
 
 # Episódios
 l_ep = Label(frame_down, text="Episódio:", anchor=NW, font=("Ivy 10 bold"), bg=co1, fg=co4, relief="flat")
-l_ep.place(x=10, y=100)
+l_ep.place(x=10, y=135)
 e_ep = Entry(frame_down, width=45, justify="left", relief="solid")
-e_ep.place(x=13, y=130)
+e_ep.place(x=13, y=160)
 
-# Descrição
-e_desc = Label(frame_down, text="Descrição:", anchor=NW, font=("Ivy 10 bold"), bg=co1, fg=co4, relief="flat")
-e_desc.place(x=10, y=150)
+# Informação Extra
+l_desc = Label(frame_down, text="Informação Extra:", anchor=NW, font=("Ivy 10 bold"), bg=co1, fg=co4, relief="flat")
+l_desc.place(x=10, y=195)
 e_desc = Entry(frame_down, width=45, justify="left", relief="solid")
-e_desc.place(x=13, y=175)
+e_desc.place(x=13, y=220)
 
-# Fillers
+# # Fillers
 l_filler = Label(frame_down, text="Filler:", anchor=NW, font=("Ivy 10 bold"), bg=co1, fg=co4, relief="flat")
-l_filler.place(x=165, y=195)
-e_filler = ttk.Combobox(frame_down, values=("Não", "Sim") , width=15)
+l_filler.place(x=165, y=255)
+e_filler = ttk.Combobox(frame_down, values=("Não", "Sim") , width=15, state="readonly")
 e_filler.set("Não")
-e_filler.place(x=167, y=220)
+e_filler.place(x=167, y=280)
 
-# Data que assistiu
+# # Data que assistiu
 l_date = Label(frame_down, text="Quando Assistiu:", anchor=NW, font=("Ivy 10 bold"), bg=co1, fg=co4, relief="flat")
-l_date.place(x=10, y=195)
+l_date.place(x=10, y=255)
 e_date = DateEntry(frame_down, width=15, background=co3 , foreground="white", borderwidth=2)
-e_date.place(x=13, y=220)
+e_date.place(x=13, y=280)
 
 window.mainloop()
