@@ -61,17 +61,29 @@ l_desc.place(x=10, y=195)
 e_desc = Entry(frame_down, width=45, justify="left", relief="solid")
 e_desc.place(x=13, y=220)
 
-# # Fillers
+# Fillers
 l_filler = Label(frame_down, text="Filler:", anchor=NW, font=("Ivy 10 bold"), bg=co1, fg=co4, relief="flat")
-l_filler.place(x=165, y=255)
+l_filler.place(x=170, y=255)
 e_filler = ttk.Combobox(frame_down, values=("Não", "Sim") , width=15, state="readonly")
 e_filler.set("Não")
-e_filler.place(x=167, y=280)
+e_filler.place(x=173, y=280)
 
-# # Data que assistiu
+# Data que assistiu
 l_date = Label(frame_down, text="Quando Assistiu:", anchor=NW, font=("Ivy 10 bold"), bg=co1, fg=co4, relief="flat")
 l_date.place(x=10, y=255)
 e_date = DateEntry(frame_down, width=15, background=co3 , foreground="white", borderwidth=2)
 e_date.place(x=13, y=280)
+
+# Botão Inserir 
+b_inserir = Button(frame_down, text="Inserir", width=10, font=("Ivy 10 bold"), bg=co6, fg=co1, relief="raised", overrelief="ridge")
+b_inserir.place(x=13, y=350)
+
+# Botão Atualizar 
+b_atualizar = Button(frame_down, text="Atualizar", width=10, font=("Ivy 10 bold"), bg=co2, fg=co1, relief="raised", overrelief="ridge")
+b_atualizar.place(x=109, y=350)
+
+# Botão Deletar 
+b_deletar = Button(frame_down, text="Deletar", width=10, font=("Ivy 10 bold"), bg=co7, fg=co1, relief="raised", overrelief="ridge")
+b_deletar.place(x=205, y=350)
 
 window.mainloop()
