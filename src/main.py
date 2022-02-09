@@ -1,7 +1,7 @@
-# Importando Tkinter 
-from cgitb import text
+# Importando Tkinter e Tkcalendar
 from tkinter import *
-from tkinter import font 
+from tkcalendar import Calendar, DateEntry
+from tkinter import ttk
 
 ################# cores ###############
 co0 = "#f0f3f5"  # Preta
@@ -35,5 +35,43 @@ frame_right.grid(row=0, column=1, rowspan=2, padx=1, pady=0, sticky=NSEW)
 # Label Cima
 app_name = Label(frame_up, text="Formulário Piece", anchor=NW, font=("Ivy 13 bold"), bg=co2, fg=co1, relief="flat")
 app_name.place(x=86, y=15)
+
+# Configurando frame baixo
+# Saga
+l_saga = Label(frame_down, text="Saga:", anchor=NW, font=("Ivy 10 bold"), bg=co1, fg=co4, relief="flat")
+l_saga.place(x=10, y=4)
+e_saga = Entry(frame_down, width=45, justify="left", relief="solid")
+e_saga.place(x=13, y=28)
+
+# Arcos
+l_arco = Label(frame_down, text="Arcos:", anchor=NW, font=("Ivy 10 bold"), bg=co1, fg=co4, relief="flat")
+l_arco.place(x=10, y=50)
+e_arco = Entry(frame_down, width=45, justify="left", relief="solid")
+e_arco.place(x=13, y=78)
+
+# Episódios
+l_ep = Label(frame_down, text="Episódio:", anchor=NW, font=("Ivy 10 bold"), bg=co1, fg=co4, relief="flat")
+l_ep.place(x=10, y=100)
+e_ep = Entry(frame_down, width=45, justify="left", relief="solid")
+e_ep.place(x=13, y=130)
+
+# Descrição
+e_desc = Label(frame_down, text="Descrição:", anchor=NW, font=("Ivy 10 bold"), bg=co1, fg=co4, relief="flat")
+e_desc.place(x=10, y=150)
+e_desc = Entry(frame_down, width=45, justify="left", relief="solid")
+e_desc.place(x=13, y=175)
+
+# Fillers
+l_filler = Label(frame_down, text="Filler:", anchor=NW, font=("Ivy 10 bold"), bg=co1, fg=co4, relief="flat")
+l_filler.place(x=165, y=195)
+e_filler = ttk.Combobox(frame_down, values=("Não", "Sim") , width=15)
+e_filler.set("Não")
+e_filler.place(x=167, y=220)
+
+# Data que assistiu
+l_date = Label(frame_down, text="Quando Assistiu:", anchor=NW, font=("Ivy 10 bold"), bg=co1, fg=co4, relief="flat")
+l_date.place(x=10, y=195)
+e_date = DateEntry(frame_down, width=15, background=co3 , foreground="white", borderwidth=2)
+e_date.place(x=13, y=220)
 
 window.mainloop()
