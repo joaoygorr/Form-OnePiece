@@ -79,7 +79,7 @@ b_inserir = Button(frame_down, text="Inserir", width=10, font=("Ivy 10 bold"), b
 b_inserir.place(x=13, y=350)
 
 # Botão Atualizar 
-b_atualizar = Button(frame_down, text="Atualizar", width=10, font=("Ivy 10 bold"), bg=co2, fg=co1, relief="raised", overrelief="ridge")
+b_atualizar = Button(frame_down, text="Editar", width=10, font=("Ivy 10 bold"), bg=co2, fg=co1, relief="raised", overrelief="ridge")
 b_atualizar.place(x=109, y=350)
 
 # Botão Deletar 
