@@ -86,4 +86,42 @@ b_atualizar.place(x=109, y=350)
 b_deletar = Button(frame_down, text="Deletar", width=10, font=("Ivy 10 bold"), bg=co7, fg=co1, relief="raised", overrelief="ridge")
 b_deletar.place(x=205, y=350)
 
+# Frame Direita 
+lista = [[1,'Ilha dos Homens-Peixe','Retorno a Sabaody', '517', "Não", '26/04/2002', 'teste'],
+         [2, 'Guerra de Marineford', 'Pequeno-oriente Azul', '427', "Sim", '26/05/2000', 'teste']
+           ]
+
+tabela_head = ['ID', 'Saga', 'Arcos', 'Episódios', 'Filler', 'Data', 'Descrição']
+
+# criando a tabela
+tree = ttk.Treeview(frame_right, selectmode="extended", columns=tabela_head, show="headings")
+
+# vertical scrollbar
+vsb = ttk.Scrollbar(frame_right, orient="vertical", command=tree.yview)
+
+# horizontal scrollbar
+hsb = ttk.Scrollbar( frame_right, orient="horizontal", command=tree.xview)
+
+tree.configure(yscrollcommand=vsb.set, xscrollcommand=hsb.set)
+tree.grid(column=0, row=0, sticky='nsew')
+vsb.grid(column=1, row=0, sticky='ns')
+hsb.grid(column=0, row=1, sticky='ew')
+
+frame_right.grid_rowconfigure(0, weight=12)
+
+
+hd=["center","center","center","center","center","center","center"]
+h=[30,170,140,80,50,80,100]
+n=0
+
+for col in tabela_head:
+    tree.heading(col, text=col.title(), anchor=CENTER)
+    # adjust the column's width to the header string
+    tree.column(col, width=h[n],anchor=hd[n])
+    
+    n+=1
+
+for item in lista:
+    tree.insert('', 'end', values=item)
+    
 window.mainloop()
