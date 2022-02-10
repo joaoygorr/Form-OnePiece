@@ -1,5 +1,5 @@
 # Importadno pymysql
-import pymysql
+
 
 try: 
   con = pymysql.connect(host="localhost", user="root", password="root")
