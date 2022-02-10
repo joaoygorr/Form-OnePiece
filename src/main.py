@@ -87,10 +87,6 @@ b_deletar = Button(frame_down, text="Deletar", width=10, font=("Ivy 10 bold"), b
 b_deletar.place(x=205, y=350)
 
 # Frame Direita 
-lista = [[1,'Ilha dos Homens-Peixe','Retorno a Sabaody', '517', "Não", '26/04/2002', 'teste'],
-         [2, 'Guerra de Marineford', 'Pequeno-oriente Azul', '427', "Sim", '26/05/2000', 'teste']
-           ]
-
 tabela_head = ['ID', 'Saga', 'Arcos', 'Episódios', 'Filler', 'Data', 'Descrição']
 
 # criando a tabela
