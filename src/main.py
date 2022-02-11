@@ -1,5 +1,6 @@
 # Importando Tkinter, Tkcalendar e db
 from tkinter import *
+from turtle import update
 from tkcalendar import DateEntry
 from tkinter import messagebox
 from tkinter import ttk
@@ -38,6 +39,10 @@ frame_right.grid(row=0, column=1, rowspan=2, padx=1, pady=0, sticky=NSEW)
 app_name = Label(frame_up, text="Formulário Piece", anchor=NW, font=("Ivy 13 bold"), bg=co2, fg=co1, relief="flat")
 app_name.place(x=86, y=15)
 
+# Váriavel global
+global tree
+
+
 # Função Inserir 
 def insert(): 
     saga = e_saga.get()
@@ -47,7 +52,7 @@ def insert():
     filler = e_filler.get()
     data = e_date.get()
     
-    lista = [saga, arco, ep, desc, data, filler]
+    lista = [saga, arco, ep, filler, data, desc]
 
     if saga == "": 
         messagebox.showerror("Erro", "Saga não pode ser em branco")
@@ -65,7 +70,65 @@ def insert():
     for widget in frame_right.winfo_children(): 
         widget.destroy()
     show()
+
+# Função Atualizar
+def atualizar(): 
+    try: 
+        treev_dados = tree.focus()
+        treev_dic = tree.item(treev_dados)
+        tree_list = treev_dic["values"]
         
+        valor = tree_list[0]
+        
+        saga = e_saga.delete(0, "end")      
+        arco = e_arco.delete(0, "end")
+        ep = e_ep.delete(0, "end")
+        desc = e_desc.delete(0, "end")
+        filler = e_filler.delete(0, "end")
+        data = e_date.delete(0, "end")
+        
+        saga = e_saga.insert(0, tree_list[1])      
+        arco = e_arco.insert(0, tree_list[2])
+        ep = e_ep.insert(0, tree_list[3])
+        desc = e_desc.insert(0, tree_list[6])
+        filler = e_filler.insert(0, tree_list[4])
+        data = e_date.insert(0, tree_list[5])
+        
+        def update(): 
+            saga = e_saga.get()
+            arco = e_arco.get()
+            ep = e_ep.get()
+            desc = e_desc.get()
+            filler = e_filler.get()
+            data = e_date.get()
+            
+            lista = [saga, arco, ep, filler, data, desc]
+
+            if saga == "": 
+                messagebox.showerror("Erro", "Saga não pode ser em branco")
+            else:
+                update_info(lista)
+                messagebox.showinfo("Sucesso", "Dados atualizados com sucesso")
+                
+                saga = e_saga.delete(0, "end")      
+                arco = e_arco.delete(0, "end")
+                ep = e_ep.delete(0, "end")
+                desc = e_desc.delete(0, "end")
+                filler = e_filler.delete(0, "end")
+                data = e_date.delete(0, "end")
+                
+            for widget in frame_right.winfo_children(): 
+                widget.destroy()
+                
+        # Botão Confirmar
+        b_confirmar = Button(frame_down, command=update, text="Confirmar", width=10, font=("Ivy 10 bold"), bg=co2, fg=co1, relief="raised", overrelief="ridge")
+        b_confirmar.place(x=109, y=320)
+    
+        show()
+
+    except IndexError: 
+        messagebox.showerror("Erro", "Selecione algum dado na tabela!")   
+    
 # Configurando frame baixo
 # Saga
 l_saga = Label(frame_down, text="Saga:", anchor=NW, font=("Ivy 10 bold"), bg=co1, fg=co4, relief="flat")
@@ -109,8 +172,8 @@ b_inserir = Button(frame_down, command=insert, text="Inserir", width=10, font=("
 b_inserir.place(x=13, y=350)
 
 # Botão Atualizar 
-b_atualizar = Button(frame_down, text="Editar", width=10, font=("Ivy 10 bold"), bg=co2, fg=co1, relief="raised", overrelief="ridge")
-b_atualizar.place(x=109, y=350)
+b_editar = Button(frame_down, command=atualizar, text="Editar", width=10, font=("Ivy 10 bold"), bg=co2, fg=co1, relief="raised", overrelief="ridge")
+b_editar.place(x=109, y=350)
 
 # Botão Deletar 
 b_deletar = Button(frame_down, text="Deletar", width=10, font=("Ivy 10 bold"), bg=co7, fg=co1, relief="raised", overrelief="ridge")
@@ -118,6 +181,8 @@ b_deletar.place(x=205, y=350)
 
 # Frame Direita
 def show(): 
+    global tree
+    
     lista = show_information()
     tabela_head = ['ID', 'Saga', 'Arcos', 'Episódios', 'Filler', 'Data', 'Descrição']
 
@@ -139,7 +204,7 @@ def show():
 
 
     hd=["center","center","center","center","center","center","center"]
-    h=[30,170,140,80,50,80,100]
+    h=[30,170,140,80,55,85,155]
     n=0
 
     for col in tabela_head:
