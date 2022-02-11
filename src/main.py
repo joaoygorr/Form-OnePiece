@@ -1,7 +1,9 @@
-# Importando Tkinter e Tkcalendar
+# Importando Tkinter, Tkcalendar e db
 from tkinter import *
-from tkcalendar import Calendar, DateEntry
+from tkcalendar import DateEntry
+from tkinter import messagebox
 from tkinter import ttk
+from db import *
 
 ################# cores ###############
 co0 = "#f0f3f5"  # Preta
@@ -26,16 +28,44 @@ window.resizable(width=FALSE, height=FALSE)
 frame_up = Frame(window, width=310, height=50, bg=co2, relief="flat")
 frame_up.grid(row=0, column=0)
 
-frame_down = Frame(window, width=310, height=400, bg=co1, relief="flat")
+frame_down = Frame(window, width=310, height=403, bg=co1, relief="flat")
 frame_down.grid(row=1, column=0, sticky=NSEW, padx=0, pady=1)
 
-frame_right = Frame(window, width=588, height=400, bg=co1, relief="flat")
+frame_right = Frame(window, width=588, height=403, bg=co1, relief="flat")
 frame_right.grid(row=0, column=1, rowspan=2, padx=1, pady=0, sticky=NSEW)
 
 # Label Cima
 app_name = Label(frame_up, text="Formulário Piece", anchor=NW, font=("Ivy 13 bold"), bg=co2, fg=co1, relief="flat")
 app_name.place(x=86, y=15)
 
+# Função Inserir 
+def insert(): 
+    saga = e_saga.get()
+    arco = e_arco.get()
+    ep = e_ep.get()
+    desc = e_desc.get()
+    filler = e_filler.get()
+    data = e_date.get()
+    
+    lista = [saga, arco, ep, desc, data, filler]
+
+    if saga == "": 
+        messagebox.showerror("Erro", "Saga não pode ser em branco")
+    else:
+        insert_info(lista)
+        messagebox.showinfo("Sucesso", "Dados inseridos com sucesso")
+        
+        saga = e_saga.delete(0, "end")      
+        arco = e_arco.delete(0, "end")
+        ep = e_ep.delete(0, "end")
+        desc = e_desc.delete(0, "end")
+        filler = e_filler.delete(0, "end")
+        data = e_date.delete(0, "end")
+        
+    for widget in frame_right.winfo_children(): 
+        widget.destroy()
+    show()
+        
 # Configurando frame baixo
 # Saga
 l_saga = Label(frame_down, text="Saga:", anchor=NW, font=("Ivy 10 bold"), bg=co1, fg=co4, relief="flat")
@@ -52,7 +82,7 @@ e_arco.place(x=13, y=100)
 # Episódios
 l_ep = Label(frame_down, text="Episódio:", anchor=NW, font=("Ivy 10 bold"), bg=co1, fg=co4, relief="flat")
 l_ep.place(x=10, y=135)
-e_ep = Entry(frame_down, width=45, justify="left", relief="solid")
+e_ep = Entry(frame_down, width=45, justify="left", relief="solid", )
 e_ep.place(x=13, y=160)
 
 # Informação Extra
@@ -75,7 +105,7 @@ e_date = DateEntry(frame_down, width=15, background=co3 , foreground="white", bo
 e_date.place(x=13, y=280)
 
 # Botão Inserir 
-b_inserir = Button(frame_down, text="Inserir", width=10, font=("Ivy 10 bold"), bg=co6, fg=co1, relief="raised", overrelief="ridge")
+b_inserir = Button(frame_down, command=insert, text="Inserir", width=10, font=("Ivy 10 bold"), bg=co6, fg=co1, relief="raised", overrelief="ridge")
 b_inserir.place(x=13, y=350)
 
 # Botão Atualizar 
@@ -86,38 +116,41 @@ b_atualizar.place(x=109, y=350)
 b_deletar = Button(frame_down, text="Deletar", width=10, font=("Ivy 10 bold"), bg=co7, fg=co1, relief="raised", overrelief="ridge")
 b_deletar.place(x=205, y=350)
 
-# Frame Direita 
-tabela_head = ['ID', 'Saga', 'Arcos', 'Episódios', 'Filler', 'Data', 'Descrição']
+# Frame Direita
+def show(): 
+    lista = show_information()
+    tabela_head = ['ID', 'Saga', 'Arcos', 'Episódios', 'Filler', 'Data', 'Descrição']
 
-# criando a tabela
-tree = ttk.Treeview(frame_right, selectmode="extended", columns=tabela_head, show="headings")
+    # criando a tabela
+    tree = ttk.Treeview(frame_right, selectmode="extended", columns=tabela_head, show="headings")
 
-# vertical scrollbar
-vsb = ttk.Scrollbar(frame_right, orient="vertical", command=tree.yview)
+    # vertical scrollbar
+    vsb = ttk.Scrollbar(frame_right, orient="vertical", command=tree.yview)
 
-# horizontal scrollbar
-hsb = ttk.Scrollbar( frame_right, orient="horizontal", command=tree.xview)
+    # horizontal scrollbar
+    hsb = ttk.Scrollbar(frame_right, orient="horizontal", command=tree.xview)
 
-tree.configure(yscrollcommand=vsb.set, xscrollcommand=hsb.set)
-tree.grid(column=0, row=0, sticky='nsew')
-vsb.grid(column=1, row=0, sticky='ns')
-hsb.grid(column=0, row=1, sticky='ew')
+    tree.configure(yscrollcommand=vsb.set, xscrollcommand=hsb.set)
+    tree.grid(column=0, row=0, sticky='nsew')
+    vsb.grid(column=1, row=0, sticky='ns')
+    hsb.grid(column=0, row=1, sticky='ew')
 
-frame_right.grid_rowconfigure(0, weight=12)
+    frame_right.grid_rowconfigure(0, weight=12)
 
 
-hd=["center","center","center","center","center","center","center"]
-h=[30,170,140,80,50,80,100]
-n=0
+    hd=["center","center","center","center","center","center","center"]
+    h=[30,170,140,80,50,80,100]
+    n=0
 
-for col in tabela_head:
-    tree.heading(col, text=col.title(), anchor=CENTER)
-    # adjust the column's width to the header string
-    tree.column(col, width=h[n],anchor=hd[n])
-    
-    n+=1
+    for col in tabela_head:
+        tree.heading(col, text=col.title(), anchor=CENTER)
+        # adjust the column's width to the header string
+        tree.column(col, width=h[n], anchor=hd[n])
+        
+        n+=1
 
-for item in lista:
-    tree.insert('', 'end', values=item)
-    
+    for item in lista:
+        tree.insert('', 'end', values=item)
+
+show()
 window.mainloop()
