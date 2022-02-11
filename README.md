@@ -19,13 +19,15 @@ That will create a new folder `env` in your project directory. Next activate it 
 .\env\scripts\activate.bat
 ```
 
-Then install the project dependencies with
+I'm using MySQL!! Then install the project dependencies with
 
 ```
 pip install -r requirements.txt
 ```
+```
+pip install pyodbc-4.0.32-cp310-cp310-win_amd64.whl
+```
 Now you can run the project with this command
-
 ```
 python main.py
 ```
