@@ -3,7 +3,7 @@ from tkinter import *
 from tkcalendar import DateEntry
 from tkinter import messagebox
 from tkinter import ttk
-from db import *
+from view import *
 
 ################# cores ###############
 co0 = "#f0f3f5"  # Preta
