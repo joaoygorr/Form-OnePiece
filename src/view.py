@@ -29,11 +29,12 @@ def insert_info(i):
 def update_info(i):
   with con:
     cursor = con.cursor()
-    query = "UPDATE Piece SET saga=?, arco=?, ep=?, filler=?, data=?, descricao=? where id=?"  
+    query = "UPDATE Piece SET saga=?, arcos=?, ep=?, filler=?, data=?, descricao=? where id=?"  
     cursor.execute(query, i)
 
-# # Deletando Informação
-# with con:
-#     cursor = con.cursor()
-#     query = "DELETE FROM piece WHERE id=?"  
-#     cursor.execute(query, lista)
+# Deletando Informação
+def delete_info(i):
+  with con:
+    cursor = con.cursor()
+    query = "DELETE FROM piece WHERE id=?"  
+    cursor.execute(query, i)

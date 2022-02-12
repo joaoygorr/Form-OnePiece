@@ -78,7 +78,7 @@ def atualizar():
         treev_dic = tree.item(treev_dados)
         tree_list = treev_dic["values"]
         
-        valor = tree_list[0]
+        valor_id = tree_list[0]
         
         saga = e_saga.delete(0, "end")      
         arco = e_arco.delete(0, "end")
@@ -102,7 +102,7 @@ def atualizar():
             filler = e_filler.get()
             data = e_date.get()
             
-            lista = [saga, arco, ep, filler, data, desc]
+            lista = [saga, arco, ep, filler, data, desc, valor_id]
 
             if saga == "": 
                 messagebox.showerror("Erro", "Saga não pode ser em branco")
@@ -119,16 +119,37 @@ def atualizar():
                 
             for widget in frame_right.winfo_children(): 
                 widget.destroy()
+            show()
                 
         # Botão Confirmar
         b_confirmar = Button(frame_down, command=update, text="Confirmar", width=10, font=("Ivy 10 bold"), bg=co2, fg=co1, relief="raised", overrelief="ridge")
         b_confirmar.place(x=109, y=320)
     
-        show()
+        
 
     except IndexError: 
         messagebox.showerror("Erro", "Selecione algum dado na tabela!")   
+
+# Função delete
+def delete(): 
+    try: 
+        treev_dados = tree.focus()
+        treev_dic = tree.item(treev_dados)
+        tree_list = treev_dic["values"]
+        
+        valor_id = [tree_list[0]]
+        
+        delete_info(valor_id)
+        messagebox.showinfo("Sucesso", "Dado apagado com sucesso!")
+        
+        for widget in frame_right.winfo_children():
+            widget.destroy()
+        show()
+        
+    except IndexError: 
+        messagebox.showerror("Erro", "Selecione algum dado na tabela!")   
     
+        
 # Configurando frame baixo
 # Saga
 l_saga = Label(frame_down, text="Saga:", anchor=NW, font=("Ivy 10 bold"), bg=co1, fg=co4, relief="flat")
@@ -176,7 +197,7 @@ b_editar = Button(frame_down, command=atualizar, text="Editar", width=10, font=(
 b_editar.place(x=109, y=350)
 
 # Botão Deletar 
-b_deletar = Button(frame_down, text="Deletar", width=10, font=("Ivy 10 bold"), bg=co7, fg=co1, relief="raised", overrelief="ridge")
+b_deletar = Button(frame_down, command=delete, text="Deletar", width=10, font=("Ivy 10 bold"), bg=co7, fg=co1, relief="raised", overrelief="ridge")
 b_deletar.place(x=205, y=350)
 
 # Frame Direita
