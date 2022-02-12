@@ -45,10 +45,10 @@ global tree
 
 # Função Inserir 
 def insert(): 
-    saga = e_saga.get()
-    arco = e_arco.get()
+    saga = e_saga.get().capitalize()
+    arco = e_arco.get().capitalize()
     ep = e_ep.get()
-    desc = e_desc.get()
+    desc = e_desc.get().capitalize()
     filler = e_filler.get()
     data = e_date.get()
     
