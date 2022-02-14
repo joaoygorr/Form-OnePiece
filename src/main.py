@@ -109,6 +109,7 @@ def atualizar():
             else:
                 update_info(lista)
                 messagebox.showinfo("Sucesso", "Dados atualizados com sucesso")
+                b_confirmar.destroy()
                 
                 saga = e_saga.delete(0, "end")      
                 arco = e_arco.delete(0, "end")
@@ -120,12 +121,10 @@ def atualizar():
             for widget in frame_right.winfo_children(): 
                 widget.destroy()
             show()
-                
+
         # Botão Confirmar
         b_confirmar = Button(frame_down, command=update, text="Confirmar", width=10, font=("Ivy 10 bold"), bg=co2, fg=co1, relief="raised", overrelief="ridge")
         b_confirmar.place(x=109, y=320)
-    
-        
 
     except IndexError: 
         messagebox.showerror("Erro", "Selecione algum dado na tabela!")   
